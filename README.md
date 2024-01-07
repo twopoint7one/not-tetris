@@ -5,4 +5,6 @@ A game that's definitely not Tetris!
 `a` - move left,
 `d` - move right,
 `s` - soft drop,
-`SPACE` - hard drop
+`SPACE` - hard drop,
+`e` - rotate clockwise,
+`q` - rotate counterclockwise
