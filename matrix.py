@@ -1,10 +1,21 @@
 import pygame
-import constants as const 
 
 # Constants --
 TOTAL_ROWS = 24
 TOTAL_COLS = 10
 CELL_SIZE = 30
+
+# Colours --
+default = (153, 160, 131)
+i_colour = (212, 163, 115)
+j_colour = (231, 200, 160)
+l_colour = (250, 237, 205)
+o_colour = (254, 250, 224)
+s_colour = (233, 237, 201)
+t_colour = (204, 213, 174)
+z_colour = (185, 194, 158)
+COLOURS = [default, i_colour, j_colour, l_colour, o_colour,
+           s_colour, t_colour, z_colour]
 
 class Matrix:
   def __init__(self):
@@ -24,7 +35,7 @@ class Matrix:
         colour = self.matrix[r][c]
         cell = pygame.Rect(c * CELL_SIZE + self.left + 1, r * CELL_SIZE + self.top + 1,
                            CELL_SIZE - 1, CELL_SIZE -1)
-        pygame.draw.rect(playfield, const.colours[colour], cell)
+        pygame.draw.rect(playfield, COLOURS[colour], cell)
 
   def valid_cell(self, row, col):
     valid_row = (row >= 0 and row < self.rows)
