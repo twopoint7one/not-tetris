@@ -8,7 +8,9 @@ A game that's definitely not Tetris!
 `SPACE` - hard drop,
 `LSHIFT` - hold block/swap held block,
 `e` - rotate clockwise,
-`q` - rotate counterclockwise
+`q` - rotate counterclockwise.
+
+When a game is finished, hitting any key will restart the game.
 
 ## Setup:
 1. Create a folder and run `git clone https://github.com/twopoint7one/not-tetris.git` in the terminal
