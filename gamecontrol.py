@@ -18,7 +18,7 @@ class GameControl:
     self.hold_block = Block(0)
     self.can_hold = True
     self.level = 1
-    self.points = 0
+    self.score = 0
     self.combo = -1
     self.game_over = False
     
@@ -40,14 +40,14 @@ class GameControl:
     if rows == 0:
       self.combo = -1
     elif rows == 1:
-      self.points += POINTS_1 * self.level
+      self.score += POINTS_1 * self.level
     elif rows == 2:
-      self.points += POINTS_2 * self.level
+      self.score += POINTS_2 * self.level
     elif rows >= 3:
-      self.points += POINTS_3 * self.level
+      self.score += POINTS_3 * self.level
     if self.combo >= 0:
-      self.points += POINTS_C * self.combo * self.level
-    print(self.points)
+      self.score += POINTS_C * self.combo * self.level
+    print(self.score)
 
   def hold(self):
     if self.can_hold:
@@ -96,10 +96,10 @@ class GameControl:
   
   def move_down(self):
     self.current_block.move(1,0)
-    self.points += 1
+    self.score += 1
     if not self.in_matrix() or self.is_collision():
       self.current_block.move(-1,0)
-      self.points -= 1
+      self.score -= 1
       self.set_block()
 
   def move_left(self):
@@ -118,7 +118,7 @@ class GameControl:
       self.current_block.move(1,0)
       rows += 1
     self.current_block.move(-1,0)
-    self.points += rows - 1
+    self.score += rows - 1
 
   def rotate_cw(self):
     self.current_block.rotation += 1;

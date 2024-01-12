@@ -1,14 +1,15 @@
 class Colours:
-  bg_colour = (139, 145, 119)
+  bg_colour = (82, 49, 20)
   text_colour = (254, 250, 224)
-  default = (153, 160, 131)
-  i_colour = (212, 163, 115)
-  j_colour = (231, 200, 160)
-  l_colour = (250, 237, 205)
-  o_colour = (254, 250, 224)
-  s_colour = (233, 237, 201)
-  t_colour = (204, 213, 174)
-  z_colour = (185, 194, 158)
+  text_shade = (239, 149, 48)
+  default = (31, 21, 10)
+  i_colour = (80, 130, 95)
+  j_colour = (41, 118, 141)
+  l_colour = (229, 123, 37)
+  o_colour = (249, 174, 58)
+  s_colour = (118, 141, 48)
+  t_colour = (130, 81, 112)
+  z_colour = (208, 71, 16)
 
   @classmethod
   def get_colours(cls):
