@@ -1,19 +1,9 @@
 import pygame
+from colours import Colours
 
 # Constants --
 CELL_SIZE = 30
-
-# Colours --
-default = (153, 160, 131)
-i_colour = (212, 163, 115)
-j_colour = (231, 200, 160)
-l_colour = (250, 237, 205)
-o_colour = (254, 250, 224)
-s_colour = (233, 237, 201)
-t_colour = (204, 213, 174)
-z_colour = (185, 194, 158)
-COLOURS = [default, i_colour, j_colour, l_colour, o_colour,
-           s_colour, t_colour, z_colour]
+COLOURS = Colours.get_colours()
 
 class Coords:
   def __init__(self, r, c):
@@ -28,21 +18,31 @@ class Block:
     self.column = 0
     self.rotation = 0 # Blocks are rotated clockwise from 0 to 3
                       #   0 is the default configuration
-    
-  def draw(self, playfield):
+    self.r = 0        # self.r and self.c are coordinates for a block's
+    self.c = 3        #   starting position
+
+  # position = 0 if adding a new block to the playfield
+  #          = 1 if drawing the next block
+  #          = 2 if drawing the held block  
+  def draw(self, playfield, position):
     shape = self.get_coords()
+    shift_left = 0
+    shift_top = 0
+    if position == 1:
+      shift_left = 270
+      shift_top = 60
+    if position == 2:
+      shift_left = 270
+      shift_top = 100
     for coords in shape:
-      cell = pygame.Rect(coords.column * CELL_SIZE + 1,
-                         coords.row * CELL_SIZE + 1,
+      cell = pygame.Rect(coords.column * CELL_SIZE + 1 + shift_left,
+                         coords.row * CELL_SIZE + 1 + shift_top,
                          CELL_SIZE - 1, CELL_SIZE - 1)
       pygame.draw.rect(playfield, COLOURS[self.id], cell)
 
   def move(self, r, c):
     self.row += r
     self.column += c
-  
-  def get_id(self):
-    return self.id
   
   def get_coords(self):
     shape = self.shape[self.rotation]
