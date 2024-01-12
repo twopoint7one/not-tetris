@@ -47,7 +47,6 @@ class GameControl:
       self.score += POINTS_3 * self.level
     if self.combo >= 0:
       self.score += POINTS_C * self.combo * self.level
-    print(self.score)
 
   def hold(self):
     if self.can_hold:

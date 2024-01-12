@@ -1,7 +1,7 @@
 class Colours:
   bg_colour = (82, 49, 20)
   text_colour = (254, 250, 224)
-  text_shade = (239, 149, 48)
+  highlight = (239, 149, 48)
   default = (31, 21, 10)
   i_colour = (80, 130, 95)
   j_colour = (41, 118, 141)
