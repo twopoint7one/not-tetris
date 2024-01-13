@@ -15,6 +15,8 @@ TEXT = pygame.font.Font("./fonts/ChakraPetch-SemiBoldItalic.ttf", 30)
 SMALL_TEXT = pygame.font.Font("./fonts/ChakraPetch-SemiBoldItalic.ttf", 20)
 SCORE_TEXT = TEXT.render("SCORE:", True, Colours.text_colour)
 SCORE_SHADE = TEXT.render("SCORE:", True, Colours.highlight)
+ROWS_CLEARED_TEXT = SMALL_TEXT.render("Rows cleared:", True, Colours.text_colour)
+HIGH_SCORE_TEXT = SMALL_TEXT.render("High score:", True, Colours.text_colour)
 NEXT_TEXT = TEXT.render("NEXT", True, Colours.text_colour)
 NEXT_SHADE = TEXT.render("NEXT", True, Colours.highlight)
 HOLD_TEXT = TEXT.render("HOLD", True, Colours.text_colour)
@@ -40,7 +42,8 @@ SCORE_RECT = pygame.Rect(333, 348, 144, 54)
 pygame.display.set_caption("Not Tetris")
 clock = pygame.time.Clock()
 DROP_BLOCK = pygame.USEREVENT
-pygame.time.set_timer(DROP_BLOCK, 500)
+drop_time = 500
+pygame.time.set_timer(DROP_BLOCK, drop_time)
 
 game = GameControl()
 
@@ -67,12 +70,20 @@ while True:
           game.rotate_ccw()
         elif event.key == pygame.K_LSHIFT:
           game.hold()
-      elif event.type == DROP_BLOCK: 
+      elif event.type == DROP_BLOCK:
           game.move_down()
+    if game.row_clears // 10 > game.level and drop_time > 50 and game.speed_up:
+      drop_time -= 60
+      pygame.time.set_timer(DROP_BLOCK, drop_time)
+      game.level += 1
+      game.speed_up = False
+      print(drop_time)
     
     DISPLAY.fill(Colours.bg_colour)
 
     TOTAL_SCORE = TEXT.render(str(game.score), True, Colours.text_colour)
+    ROWS_CLEARED = SMALL_TEXT.render(str(game.row_clears), True, Colours.text_colour)
+    HIGH_SCORE = SMALL_TEXT.render(str(game.high_score), True, Colours.text_colour)
     
     pygame.draw.rect(DISPLAY, Colours.highlight, BOTTOM_RECT)
     pygame.draw.rect(DISPLAY, Colours.default, SIDE_RECT)
@@ -92,6 +103,10 @@ while True:
     DISPLAY.blit(SCORE_TEXT, (310, 322, 50, 50))
     DISPLAY.blit(TOTAL_SCORE, TOTAL_SCORE.get_rect(centerx = SCORE_RECT.centerx,
                                                    centery = SCORE_RECT.centery))
+    DISPLAY.blit(ROWS_CLEARED_TEXT, (315, 390, 50, 50))
+    DISPLAY.blit(ROWS_CLEARED, (450, 390, 50, 50))
+    DISPLAY.blit(HIGH_SCORE_TEXT, (315, 410, 50, 50))
+    DISPLAY.blit(HIGH_SCORE, (425, 410, 50, 50))
     
     if game.game_over:
       DISPLAY.blit(GAME_OVER, (315, 500, 50, 50))

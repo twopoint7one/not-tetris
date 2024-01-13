@@ -17,9 +17,12 @@ class GameControl:
     self.next_block = self.generate_block()
     self.hold_block = Block(0)
     self.can_hold = True
-    self.level = 1
+    self.high_score = 0
+    self.row_clears = 0
     self.score = 0
     self.combo = -1
+    self.level = 0
+    self.speed_up = True
     self.game_over = False
     
   def generate_block(self):
@@ -34,19 +37,26 @@ class GameControl:
     self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
     self.current_block = self.generate_block()
     self.next_block = self.generate_block()
+    if self.score > self.high_score:
+      self.high_score = self.score
+    self.score = 0
+    self.row_clears = 0
     self.game_over = False
   
   def update_score(self, rows):
     if rows == 0:
       self.combo = -1
     elif rows == 1:
-      self.score += POINTS_1 * self.level
+      self.score += POINTS_1 * self.row_clears
     elif rows == 2:
-      self.score += POINTS_2 * self.level
+      self.score += POINTS_2 * self.row_clears
     elif rows >= 3:
-      self.score += POINTS_3 * self.level
+      self.score += POINTS_3 * self.row_clears
     if self.combo >= 0:
-      self.score += POINTS_C * self.combo * self.level
+      self.score += POINTS_C * self.combo * self.row_clears
+    
+  def level_up(self):
+    self.level += 1
 
   def hold(self):
     if self.can_hold:
@@ -90,6 +100,9 @@ class GameControl:
     self.can_hold = True
     rows = self.matrix.check_rows()
     self.update_score(rows)
+    self.row_clears += rows
+    if rows >= 1:
+      self.speed_up = True
     if self.is_collision():
       self.game_over = True
   
