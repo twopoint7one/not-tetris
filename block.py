@@ -18,8 +18,6 @@ class Block:
     self.column = 0
     self.rotation = 0 # Blocks are rotated clockwise from 0 to 3
                       #   0 is the default configuration
-    self.r = 0        # self.r and self.c are coordinates for a block's
-    self.c = 3        #   starting position
  
   def draw_play(self, playfield):
     shape = self.get_coords()
