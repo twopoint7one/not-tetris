@@ -29,12 +29,12 @@ DISPLAY = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 SIDE_RECT = pygame.Rect(303, 0, 197, 710)
 BOTTOM_RECT = pygame.Rect(303, 700, 197, 20)
 
-NEXT_OUTLINE = pygame.Rect(330, 30, 155, 100)
-NEXT_RECT = pygame.Rect(333, 33, 149, 94)
-HOLD_OUTLINE = pygame.Rect(330, 170, 155, 100)
-HOLD_RECT = pygame.Rect(333, 173, 149, 94)
-SCORE_OUTLINE = pygame.Rect(330, 370, 155, 60)
-SCORE_RECT = pygame.Rect(333, 373, 149, 54)
+NEXT_OUTLINE = pygame.Rect(330, 30, 150, 90)
+NEXT_RECT = pygame.Rect(333, 33, 144, 84)
+HOLD_OUTLINE = pygame.Rect(330, 165, 150, 90)
+HOLD_RECT = pygame.Rect(333, 168, 144, 84)
+SCORE_OUTLINE = pygame.Rect(330, 345, 150, 60)
+SCORE_RECT = pygame.Rect(333, 348, 144, 54)
 
 
 pygame.display.set_caption("Not Tetris")
@@ -86,10 +86,10 @@ while True:
 
     DISPLAY.blit(NEXT_SHADE, (312, 9, 50, 50))
     DISPLAY.blit(NEXT_TEXT, (310, 7, 50, 50))
-    DISPLAY.blit(HOLD_SHADE, (313, 149, 50, 50))
-    DISPLAY.blit(HOLD_TEXT, (310, 147, 50, 50))
-    DISPLAY.blit(SCORE_SHADE, (312, 349, 50, 50))
-    DISPLAY.blit(SCORE_TEXT, (310, 347, 50, 50))
+    DISPLAY.blit(HOLD_SHADE, (312, 144, 50, 50))
+    DISPLAY.blit(HOLD_TEXT, (310, 142, 50, 50))
+    DISPLAY.blit(SCORE_SHADE, (312, 324, 50, 50))
+    DISPLAY.blit(SCORE_TEXT, (310, 322, 50, 50))
     DISPLAY.blit(TOTAL_SCORE, TOTAL_SCORE.get_rect(centerx = SCORE_RECT.centerx,
                                                    centery = SCORE_RECT.centery))
     

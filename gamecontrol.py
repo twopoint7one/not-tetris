@@ -62,10 +62,10 @@ class GameControl:
   
   def draw(self, display):
     self.matrix.draw(display)
-    self.current_block.draw(display, 0)
-    self.next_block.draw(display, 1)
+    self.current_block.draw_play(display)
+    self.next_block.draw_side(display, 0)
     if self.hold_block.id != 0:
-      self.hold_block.draw(display, 2)
+      self.hold_block.draw_side(display, 1)
   
   def in_matrix(self):
     cells = self.current_block.get_coords()

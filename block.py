@@ -20,23 +20,39 @@ class Block:
                       #   0 is the default configuration
     self.r = 0        # self.r and self.c are coordinates for a block's
     self.c = 3        #   starting position
-
-  # position = 0 if adding a new block to the playfield
-  #          = 1 if drawing the next block
-  #          = 2 if drawing the held block  
-  def draw(self, playfield, position):
+ 
+  def draw_play(self, playfield):
     shape = self.get_coords()
+    for coords in shape:
+      cell = pygame.Rect(coords.column * CELL_SIZE + 1,
+                         coords.row * CELL_SIZE + 1,
+                         CELL_SIZE - 1, CELL_SIZE - 1)
+      pygame.draw.rect(playfield, COLOURS[self.id], cell)
+
+  # position = 0 if drawing the next block
+  #          = 1 if drawing the held block 
+  def draw_side(self, playfield, position):
+    shape = self.shape[0]
     shift_left = 0
     shift_top = 0
-    if position == 1:
-      shift_left = 270
-      shift_top = 60
-    if position == 2:
-      shift_left = 270
-      shift_top = 100
+    if position == 0:
+      row_down = 1
+      shift_top = 15
+      if self.id == 1:
+        shift_left = -15
+        shift_top = 0
+      elif self.id == 4:
+        shift_left = 15
+    else:
+      row_down = 6
+      if self.id == 1:
+        shift_left = -15
+        shift_top = -15
+      elif self.id == 4:
+        shift_left = 15
     for coords in shape:
-      cell = pygame.Rect(coords.column * CELL_SIZE + 1 + shift_left,
-                         coords.row * CELL_SIZE + 1 + shift_top,
+      cell = pygame.Rect((coords.column + 12) * CELL_SIZE + 1 + shift_left,
+                         (coords.row + row_down) * CELL_SIZE + 1 + shift_top,
                          CELL_SIZE - 1, CELL_SIZE - 1)
       pygame.draw.rect(playfield, COLOURS[self.id], cell)
 
