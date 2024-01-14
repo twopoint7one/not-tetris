@@ -31,13 +31,13 @@ RESTART_TEXT_2 = SMALL_TEXT.render("to restart", True, Colours.text_colour)
 
 CONTROLS_TEXT = SMALL_TEXT.render("CONTROLS:", True, Colours.text_colour)
 CONTROLS_SHADE = SMALL_TEXT.render("CONTROLS:", True, Colours.highlight)
-LEFT_TEXT = SMALLER_TEXT.render("Move left - LEFT", True, Colours.text_colour)
-RIGHT_TEXT = SMALLER_TEXT.render("Move right - RIGHT", True, Colours.text_colour)
-SOFT_TEXT = SMALLER_TEXT.render("Soft drop - DOWN", True, Colours.text_colour)
+LEFT_TEXT = SMALLER_TEXT.render("Move left - LEFT/D", True, Colours.text_colour)
+RIGHT_TEXT = SMALLER_TEXT.render("Move right - RIGHT/A", True, Colours.text_colour)
+SOFT_TEXT = SMALLER_TEXT.render("Soft drop - DOWN/S", True, Colours.text_colour)
 HARD_TEXT = SMALLER_TEXT.render("Hard drop - SPACE", True, Colours.text_colour)
-CW_TEXT = SMALLER_TEXT.render("Rotate CW - X", True, Colours.text_colour)
-CCW_TEXT = SMALLER_TEXT.render("Rotate CCW - Z", True, Colours.text_colour)
-HOLD_KEY_TEXT = SMALLER_TEXT.render("Hold block - C", True, Colours.text_colour)
+CW_TEXT = SMALLER_TEXT.render("Rotate CW - X/E", True, Colours.text_colour)
+CCW_TEXT = SMALLER_TEXT.render("Rotate CCW - Z/Q", True, Colours.text_colour)
+HOLD_KEY_TEXT = SMALLER_TEXT.render("Hold block - C/LSHIFT", True, Colours.text_colour)
 
 # Game display --
 COLOURS = Colours.get_colours()
@@ -52,7 +52,7 @@ HOLD_RECT = pygame.Rect(333, 168, 144, 84)
 SCORE_OUTLINE = pygame.Rect(330, 345, 150, 60)
 SCORE_RECT = pygame.Rect(333, 348, 144, 54)
 
-
+# Game setup --
 pygame.display.set_caption("Not Tetris")
 clock = pygame.time.Clock()
 DROP_BLOCK = pygame.USEREVENT
@@ -70,19 +70,19 @@ while True:
       game.new_game()
     elif not game.game_over:
       if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_DOWN:
+        if event.key == pygame.K_DOWN or event.key == pygame.K_s:
           game.move_down()
-        elif event.key == pygame.K_LEFT:
+        elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
           game.move_left()
-        elif event.key == pygame.K_RIGHT:
+        elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
           game.move_right()
         elif event.key == pygame.K_SPACE:
           game.drop_block()
-        elif event.key == pygame.K_x:
+        elif event.key == pygame.K_x or event.key == pygame.K_e:
           game.rotate_cw()
-        elif event.key == pygame.K_z:
+        elif event.key == pygame.K_z or event.key == pygame.K_q:
           game.rotate_ccw()
-        elif event.key == pygame.K_c:
+        elif event.key == pygame.K_c or event.key == pygame.K_LSHIFT:
           game.hold()
       elif event.type == DROP_BLOCK:
           game.move_down()
@@ -123,6 +123,7 @@ while True:
     DISPLAY.blit(HIGH_SCORE, (425, 410, 50, 50))
     
     if game.game_over:
+      drop_time = 500
       DISPLAY.blit(GAME_OVER, (315, 500, 50, 50))
       DISPLAY.blit(RESTART_TEXT_1, (335, 540, 50, 50))
       DISPLAY.blit(RESTART_TEXT_2, (350, 560, 50, 50))

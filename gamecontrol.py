@@ -34,7 +34,7 @@ class GameControl:
   def new_game(self):
     self.matrix.reset()
     self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
-    self.hold = Block(0)
+    self.hold_block = Block(0)
     self.can_hold = True
     self.current_block = self.generate_block()
     self.next_block = self.generate_block()
