@@ -35,8 +35,8 @@ LEFT_TEXT = SMALLER_TEXT.render("Move left - LEFT", True, Colours.text_colour)
 RIGHT_TEXT = SMALLER_TEXT.render("Move right - RIGHT", True, Colours.text_colour)
 SOFT_TEXT = SMALLER_TEXT.render("Soft drop - DOWN", True, Colours.text_colour)
 HARD_TEXT = SMALLER_TEXT.render("Hard drop - SPACE", True, Colours.text_colour)
-CW_TEXT = SMALLER_TEXT.render("Rotate clockwise - X", True, Colours.text_colour)
-CCW_TEXT = SMALLER_TEXT.render("Rotate counterclockwise - Z", True, Colours.text_colour)
+CW_TEXT = SMALLER_TEXT.render("Rotate CW - X", True, Colours.text_colour)
+CCW_TEXT = SMALLER_TEXT.render("Rotate CCW - Z", True, Colours.text_colour)
 HOLD_KEY_TEXT = SMALLER_TEXT.render("Hold block - C", True, Colours.text_colour)
 
 # Game display --
@@ -78,9 +78,9 @@ while True:
           game.move_right()
         elif event.key == pygame.K_SPACE:
           game.drop_block()
-        elif event.key == pygame.K_z:
-          game.rotate_cw()
         elif event.key == pygame.K_x:
+          game.rotate_cw()
+        elif event.key == pygame.K_z:
           game.rotate_ccw()
         elif event.key == pygame.K_c:
           game.hold()
@@ -127,9 +127,15 @@ while True:
       DISPLAY.blit(RESTART_TEXT_1, (335, 540, 50, 50))
       DISPLAY.blit(RESTART_TEXT_2, (350, 560, 50, 50))
     else:
-      DISPLAY.blit(CONTROLS_SHADE, (312, 482, 50, 50))
-      DISPLAY.blit(CONTROLS_TEXT, (310, 480, 50, 50))
-      DISPLAY.blit(LEFT_TEXT, (310, 490, 50, 50))
+      DISPLAY.blit(CONTROLS_SHADE, (311, 461, 50, 50))
+      DISPLAY.blit(CONTROLS_TEXT, (310, 460, 50, 50))
+      DISPLAY.blit(LEFT_TEXT, (320, 485, 50, 50))
+      DISPLAY.blit(RIGHT_TEXT, (320, 500, 50, 50))
+      DISPLAY.blit(SOFT_TEXT, (320, 515, 50, 50))
+      DISPLAY.blit(HARD_TEXT, (320, 530, 50, 50))
+      DISPLAY.blit(HOLD_KEY_TEXT, (320, 545, 50, 50))
+      DISPLAY.blit(CW_TEXT, (320, 560, 50, 50))
+      DISPLAY.blit(CCW_TEXT, (320, 575, 50, 50))
 
     pygame.display.update()
     clock.tick(FPS)

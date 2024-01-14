@@ -34,12 +34,17 @@ class GameControl:
   def new_game(self):
     self.matrix.reset()
     self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
+    self.hold = Block(0)
+    self.can_hold = True
     self.current_block = self.generate_block()
     self.next_block = self.generate_block()
     if self.score > self.high_score:
       self.high_score = self.score
     self.score = 0
     self.row_clears = 0
+    self.combo = -1
+    self.level = 0
+    self.speed_up = True
     self.game_over = False
   
   def update_score(self, rows):
