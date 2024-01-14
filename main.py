@@ -13,19 +13,33 @@ FPS = 30
 # Game text --
 TEXT = pygame.font.Font("./fonts/ChakraPetch-SemiBoldItalic.ttf", 30)
 SMALL_TEXT = pygame.font.Font("./fonts/ChakraPetch-SemiBoldItalic.ttf", 20)
+SMALLER_TEXT = pygame.font.Font("./fonts/ChakraPetch-SemiBoldItalic.ttf", 15)
+
 SCORE_TEXT = TEXT.render("SCORE:", True, Colours.text_colour)
 SCORE_SHADE = TEXT.render("SCORE:", True, Colours.highlight)
 ROWS_CLEARED_TEXT = SMALL_TEXT.render("Rows cleared:", True, Colours.text_colour)
 HIGH_SCORE_TEXT = SMALL_TEXT.render("High score:", True, Colours.text_colour)
+
 NEXT_TEXT = TEXT.render("NEXT", True, Colours.text_colour)
 NEXT_SHADE = TEXT.render("NEXT", True, Colours.highlight)
 HOLD_TEXT = TEXT.render("HOLD", True, Colours.text_colour)
 HOLD_SHADE = TEXT.render("HOLD", True, Colours.highlight)
+
 GAME_OVER = TEXT.render("GAME OVER", True, Colours.text_colour)
 RESTART_TEXT_1 = SMALL_TEXT.render("Press any key", True, Colours.text_colour)
 RESTART_TEXT_2 = SMALL_TEXT.render("to restart", True, Colours.text_colour)
 
-# Game display
+CONTROLS_TEXT = SMALL_TEXT.render("CONTROLS:", True, Colours.text_colour)
+CONTROLS_SHADE = SMALL_TEXT.render("CONTROLS:", True, Colours.highlight)
+LEFT_TEXT = SMALLER_TEXT.render("Move left - LEFT", True, Colours.text_colour)
+RIGHT_TEXT = SMALLER_TEXT.render("Move right - RIGHT", True, Colours.text_colour)
+SOFT_TEXT = SMALLER_TEXT.render("Soft drop - DOWN", True, Colours.text_colour)
+HARD_TEXT = SMALLER_TEXT.render("Hard drop - SPACE", True, Colours.text_colour)
+CW_TEXT = SMALLER_TEXT.render("Rotate clockwise - X", True, Colours.text_colour)
+CCW_TEXT = SMALLER_TEXT.render("Rotate counterclockwise - Z", True, Colours.text_colour)
+HOLD_KEY_TEXT = SMALLER_TEXT.render("Hold block - C", True, Colours.text_colour)
+
+# Game display --
 COLOURS = Colours.get_colours()
 DISPLAY = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 SIDE_RECT = pygame.Rect(303, 0, 197, 710)
@@ -56,19 +70,19 @@ while True:
       game.new_game()
     elif not game.game_over:
       if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_s:
+        if event.key == pygame.K_DOWN:
           game.move_down()
-        elif event.key == pygame.K_a:
+        elif event.key == pygame.K_LEFT:
           game.move_left()
-        elif event.key == pygame.K_d:
+        elif event.key == pygame.K_RIGHT:
           game.move_right()
         elif event.key == pygame.K_SPACE:
           game.drop_block()
-        elif event.key == pygame.K_e:
+        elif event.key == pygame.K_z:
           game.rotate_cw()
-        elif event.key == pygame.K_q:
+        elif event.key == pygame.K_x:
           game.rotate_ccw()
-        elif event.key == pygame.K_LSHIFT:
+        elif event.key == pygame.K_c:
           game.hold()
       elif event.type == DROP_BLOCK:
           game.move_down()
@@ -77,8 +91,8 @@ while True:
       pygame.time.set_timer(DROP_BLOCK, drop_time)
       game.level += 1
       game.speed_up = False
-      print(drop_time)
     
+    # Displays --
     DISPLAY.fill(Colours.bg_colour)
 
     TOTAL_SCORE = TEXT.render(str(game.score), True, Colours.text_colour)
@@ -112,6 +126,10 @@ while True:
       DISPLAY.blit(GAME_OVER, (315, 500, 50, 50))
       DISPLAY.blit(RESTART_TEXT_1, (335, 540, 50, 50))
       DISPLAY.blit(RESTART_TEXT_2, (350, 560, 50, 50))
+    else:
+      DISPLAY.blit(CONTROLS_SHADE, (312, 482, 50, 50))
+      DISPLAY.blit(CONTROLS_TEXT, (310, 480, 50, 50))
+      DISPLAY.blit(LEFT_TEXT, (310, 490, 50, 50))
 
     pygame.display.update()
     clock.tick(FPS)

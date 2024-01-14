@@ -1,4 +1,3 @@
-import pygame
 import random
 from matrix import Matrix
 from blocks import *
